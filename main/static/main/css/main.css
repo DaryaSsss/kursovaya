@@ -1,0 +1,172 @@
+* {
+margin:0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+nav {
+  max-width: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #152F4F;
+  box-shadow: 0 4px 6px #C0C0C0;
+  height: 50px;
+}
+ul {
+  margin: 0;
+  list-style: none;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  text-align:center;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+a:hover {
+color: #EEE8AA;
+}
+li a {
+  color: WhiteSmoke;
+  text-transform: uppercase;
+}
+li {
+  display: inline-block;
+  margin-left: 25px;
+  transition: .5s linear;
+}
+li a:after {
+  content: '';
+  width: 0;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  background: #EEE8AA;
+  transition: all 0.5s linear;
+}
+li a:hover:after{
+  width: 100%;
+}
+h1 {
+text-align: center;
+}
+.footer{
+  background: #152F4F;
+  color:WhiteSmoke;
+  margin-top: auto!important;
+
+  .links{
+    li a{
+      color: white;
+      transition: color .2s;
+      &:hover{
+        text-decoration:none;
+        color:#4180CB;
+        }
+    }
+  }
+  .about-company{
+    i{font-size: 25px;}
+    a{
+      color:white;
+      transition: color .2s;
+      &:hover{color:#4180CB}
+    }
+  }
+  .location{
+    i{font-size: 18px;}
+  }
+  .copyright p{border-top:1px solid rgba(255,255,255,.1);}
+}
+
+main {
+padding-bottom: 40px;
+}
+main .features h1 {
+text-align: center;
+margin-top: 24px;
+margin-bottom: 24px;
+}
+main .features p {
+text-align:left;
+max-width: 500px;
+margin: 16px 30px;
+font-size: 20px;
+}
+main .features img {
+align: right;
+width:500px;
+height:350px;
+opacity: 0.8;
+border-radius: 10px;
+margin-left:15px;
+}
+table a {
+color: #152F4F;
+font-size: 25px;
+}
+table p {
+display:flex;
+justify-content: space-between;
+flex-direction: column;
+}
+tr {
+vertical-align: top;
+}
+.btn-light {
+background-color:#152F4F;
+border-color: #152F4F;
+color: WhiteSmoke;
+}
+.btn-light:hover {
+background-color:#EEE8AA;
+border-color: #EEE8AA;
+}
+main .forms {
+margin-left: 20px;
+margin-top: 15px;
+min-height: 60vh;
+}
+main .forms span {
+display: none
+}
+main .forms ul {
+display: none;
+}
+.serenya {
+margin: 26px 26px;
+padding: 35px 30px;
+background: lightgray;
+border-radius: 5px;
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.serenya h3{
+text-transform: uppercase;
+}
+.serenya a {
+margin-top: auto;
+}
+.form-control {
+width: auto;
+margin-left: 35px;
+}
+.errorlist {
+display: block!important;
+text-align: left;
+padding: 0px;
+}
+.errorlist li {
+margin-left: 0px
+}
+

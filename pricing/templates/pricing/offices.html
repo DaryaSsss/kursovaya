@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ office.name }}{% endblock %}
+
+{% block content %}
+<div class="features">
+   {% if offices %}
+    <div class="container">
+  <div class="row">
+      {% for el in offices %}
+      <div class="col-lg-4 mb-5">
+<div class="serenya">
+    <h3>{{el.name}}</h3>
+    <p>{{el.desc|linebreaksbr}}</p>
+        {% if user.is_authenticated %}
+                <a href="{% url 'bookoffice' el.id %}" class="btn btn-light">Book place</a>
+                {% else %}
+               <a href="{% url 'login' %}" class="btn btn-light">Sign in to book place</a>
+                {% endif %}
+</div>
+     </div>
+    {% endfor %}
+  </div>
+</div>
+    {% else %}
+    <p>No free offices at this moment:(</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Book place{% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>You are booking this place: {{ meetingroom }}</h1>
+    <p>Please fill the forms</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.people }}<br>
+        {{ form.email }}<br>
+        {{ form.date }}
+        {{ form.place }}
+        <p>CLick here to pay and book place
+            {{ form.paid }}<br></p>
+        <p><span>{{ error }}</span></p>
+        <p><button class="btn btn-light" type="submit">Book place</button></p>
+    </form>
+</div>
+{% endblock %}

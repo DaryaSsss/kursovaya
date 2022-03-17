@@ -1,0 +1,19 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="features">
+ <h1>About our company</h1>
+    <table>
+        <tr>
+            <td style="text-align: left"><img src="{% static 'main/img/img.png' %}" alt="Coworking">
+            </td>
+            <td><p>Coworking is an arrangement in which workers of different companies share an office space, allowing cost savings and convenience through the use of common infrastructures, such as equipment, utilities, and receptionist and custodial services, and in some cases refreshments and parcel acceptance services.</p>
+        </td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}
+
