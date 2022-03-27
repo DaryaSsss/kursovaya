@@ -1,7 +1,8 @@
-* {
+*, *:after, *:before{
 margin:0;
 padding: 0;
 box-sizing: border-box;
+ transition: .5s ease-in-out;
 }
 body {
 display: flex;
@@ -102,12 +103,8 @@ margin: 16px 30px;
 font-size: 20px;
 }
 main .features img {
-align: right;
-width:500px;
-height:350px;
-opacity: 0.8;
 border-radius: 10px;
-margin-left:15px;
+display: inline-block;
 }
 table a {
 color: #152F4F;
@@ -150,7 +147,6 @@ height: 100%;
 display: flex;
 flex-direction: column;
 }
-
 .serenya h3{
 text-transform: uppercase;
 }
@@ -169,4 +165,24 @@ padding: 0px;
 .errorlist li {
 margin-left: 0px
 }
-
+.container {
+max-width: 100%;
+}
+.serenya1 {
+padding: 15px 15px;
+background: lightgray;
+border-radius: 5px;
+height: 100%;
+display: flex;
+flex-direction: column;
+margin: 10px 0px;
+}
+.serenya1 a {
+margin-top: auto;
+}
+.serenya1 p {
+margin: 10px 0px !important;
+}
+.row>* {
+margin-bottom: 15px;
+}
