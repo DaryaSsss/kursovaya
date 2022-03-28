@@ -2,29 +2,29 @@
 margin:0;
 padding: 0;
 box-sizing: border-box;
- transition: .5s ease-in-out;
 }
 body {
 display: flex;
 flex-direction: column;
 min-height: 100vh;
 }
-nav {
-  max-width: auto;
+.navbar {
   margin: 0 auto;
-  overflow: hidden;
   background: #152F4F;
   box-shadow: 0 4px 6px #C0C0C0;
-  height: 50px;
+  height: auto;
+}
+.nav {
+flex-wrap: nowrap;
 }
 ul {
   margin: 0;
   list-style: none;
   float: left;
-  height: 50px;
+  height: auto;
   line-height: 50px;
-  text-align:center;
   width: 100%;
+  padding-left: 0px;
 }
 a {
   text-decoration: none;
@@ -139,8 +139,8 @@ main .forms ul {
 display: none;
 }
 .serenya {
-margin: 26px 26px;
-padding: 35px 30px;
+margin: 15px 10px;
+padding: 15px 15px;
 background: lightgray;
 border-radius: 5px;
 height: 100%;
@@ -152,6 +152,9 @@ text-transform: uppercase;
 }
 .serenya a {
 margin-top: auto;
+}
+.serenya p {
+margin: 10px 0px !important;
 }
 .form-control {
 width: auto;
@@ -168,21 +171,17 @@ margin-left: 0px
 .container {
 max-width: 100%;
 }
-.serenya1 {
-padding: 15px 15px;
-background: lightgray;
-border-radius: 5px;
-height: 100%;
-display: flex;
-flex-direction: column;
-margin: 10px 0px;
-}
-.serenya1 a {
-margin-top: auto;
-}
-.serenya1 p {
-margin: 10px 0px !important;
-}
 .row>* {
 margin-bottom: 15px;
+}
+.bi-list {
+color: WhiteSmoke;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+@media (min-width: 1024px){
+.customspan {
+margin-left: auto;
+}
 }
