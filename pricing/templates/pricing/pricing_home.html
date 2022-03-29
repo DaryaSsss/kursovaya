@@ -2,49 +2,58 @@
 {% load static %}
 {% block title %}Pricing{% endblock %}
 
+
 {% block content %}
 <div class="features">
- <h1>Choose a perfect place for you</h1>
- <table>
-        <tr>
-            <td style="text-align: left"><img src="{% static 'main/img/workplace.png' %}" alt="Coworking" style="width: 400px; height: 250px">
+    <div class="container mt-4">
+        <div class="row rows-col-3">
+            <div class="col-lg-4 mr-5">
+                <div class="serenya">
+          <img src="{% static 'main/img/workplace.jpg' %}" class="img-fluid" alt="Coworking">
                 <p>Workplace</p>
                 <p>Just for you and your work.</p>
-                <p style="font-size: 15px">Include: <br>
-                     Access 24/7 <br>
-                Workplace for one person<br>
+                <p style="font-size: 15px">
+                    Include: <br>
+                    Access 24/7 <br>
+                    Workplace for one person<br>
                     Separate cabinet(optional) <br>
-                Unlimited access to Wi-fi, water <br>
+                    Unlimited access to Wi-fi, water <br>
                     Shared printer and similar stuffs <br>
                 </p>
-                <p><a href="{% url 'workplaces' %}" class="btn btn-light">See options</a></p>
-            </td>
-            <td style="text-align: left"><img src="{% static 'main/img/officeteam.png' %}" alt="Coworking" style="width: 400px; height: 250px">
+                <a href="{% url 'workplaces' %}" class="btn btn-light">See options</a>
+            </div>
+            </div>
+            <div class="col-lg-4 mr-5">
+                 <div class="serenya">
+                 <img src="{% static 'main/img/officeteam.jpg' %}" class="img-fluid" alt="Coworking">
                 <p>Office for your team</p>
                 <p>Just an office for your team. But better.</p>
-                <p style="font-size: 15px">Include: <br>
+                <p style="font-size: 15px">
+                    Include: <br>
                     Access 24/7 <br>
-                Workplaces for 5-15 peoples <br>
-                Separate cabinets(optional) <br>
-                Unlimited access to Wi-fi, water <br>
-                Your own office technics(printer and similar)</p>
-                <p><a href="{% url 'offices' %}" class="btn btn-light">See options</a></p>
-            </td>
-           <td style="text-align: left"><img src="{% static 'main/img/meetingroom.png' %}" alt="Coworking" style="width: 400px; height: 250px">
-             <p>The meeting room</p>
-               <p>Need to talk? Here you go.</p>
-               <p style="font-size: 15px">Include: <br>
-                   Access 6:00-0:00 <br>
-               Room for 5-25 peoples <br>
-               Interactive whiteboard/smart TV <br>
-               Unlimited access to Wi-fi, water <br>
-                   Rooms with view
+                    Workplaces for 5-15 peoples <br>
+                    Separate cabinets(optional) <br>
+                    Unlimited access to Wi-fi, water <br>
+                    Your own office technics(printer and similar)</p>
+                <a href="{% url 'offices' %}" class="btn btn-light">See options</a>
+            </div>
+            </div>
+            <div class="col-lg-4 mr-5">
+                <div class="serenya">
+                <img src="{% static 'main/img/meetingroom.jpg' %}" class="img-fluid" alt="Coworking" >
+                <p>The meeting room</p>
+                <p>Need to talk? Here you go.</p>
+                <p style="font-size: 15px">
+                    Include: <br>
+                    Access 6:00-0:00 <br>Room for 5-25 peoples <br>
+                    Interactive whiteboard/smart TV <br>
+                    Unlimited access to Wi-fi, water <br>
+                    Rooms with view
                </p>
-                <p><a href="{% url 'meetingrooms' %}" class="btn btn-light">See options</a></p>
-            </td>
-        </td>
-        </tr>
-    </table>
+                <a href="{% url 'meetingrooms' %}" class="btn btn-light">See options</a>
+            </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
