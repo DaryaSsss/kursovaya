@@ -28,8 +28,8 @@
         {% if user.is_authenticated %}
          <li class="nav-item"><a data-content="logout" href="{% url 'logout' %}">Logout from {{ user.username }}</a></li>
         {% else %}
-      <li class="nav-item"><a data-content="login" href="{% url 'login' %}" >Sign in</a></li>
-      <li class="nav-item"><a data-content="signup" href="{% url 'signup' %}" >Sing up</a></li>
+      <li class="nav-item"><a data-content="sign in" href="{% url 'login' %}" >Sign in</a></li>
+      <li class="nav-item"><a data-content="sign up" href="{% url 'signup' %}" >Sign up</a></li>
         {% endif %}
         </span>
     </ul>
