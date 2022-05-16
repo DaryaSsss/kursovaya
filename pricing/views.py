@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView, UpdateView, DeleteView
 from .models import Workplace, Offices, MeetingRooms
 from .forms import WorkplaceForm, OfficeForm, MeetingRoomForm
+from django.core.paginator import Paginator
+
+
 
 def pricing_home(request):
     return render(request, 'pricing/pricing_home.html')
@@ -9,7 +12,11 @@ def pricing_home(request):
 
 def workplaces(request):
     workplaces = Workplace.objects.all().filter(free='True')
-    return render(request, 'pricing/workplaces.html', {'workplaces': workplaces})
+    paginator = Paginator(workplaces, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'pricing/workplaces.html', {'workplaces': workplaces, 'page_obj': page_obj},)
 
 def offices(request):
     offices = Offices.objects.all().filter(free='True')

@@ -4,12 +4,8 @@ from django.forms import ModelForm, TextInput, DateInput, Textarea, EmailInput
 class WorkplaceForm(ModelForm):
     class Meta:
         model = WorkplaceBooking
-        fields = ['people', 'date', 'email']
+        fields = ['date', 'email']
         widgets = {
-            "people": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your name'
-            }),
             "email": EmailInput(attrs= {
                 'class': 'form-control',
                 'placeholder': 'Your email'
@@ -23,12 +19,8 @@ class WorkplaceForm(ModelForm):
 class OfficeForm(ModelForm):
     class Meta:
         model = OfficeBooking
-        fields = ['people', 'date', 'email']
+        fields = ['date', 'email']
         widgets ={
-            "people": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your name'
-            }),
             "email": EmailInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Your email'
@@ -42,12 +34,8 @@ class OfficeForm(ModelForm):
 class MeetingRoomForm(ModelForm):
     class Meta:
         model = MeetingRoomsBooking
-        fields = ['people', 'date', 'email']
+        fields = ['date', 'email']
         widgets ={
-            "people": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your name'
-            }),
             "email": EmailInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Your email'
