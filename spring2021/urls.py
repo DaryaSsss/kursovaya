@@ -62,7 +62,7 @@ class UserBookingsList(generics.ListAPIView):
         return OfficeBooking.objects.filter(user = user)
 
     filter_backends = [filters.SearchFilter]
-    search_fields = ['user__username']
+    search_fields = ['place__name']
 
 
 class UserViewSet(viewsets.ModelViewSet):
