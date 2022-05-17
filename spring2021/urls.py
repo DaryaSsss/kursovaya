@@ -5,12 +5,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets, status, pagination, generics
+from rest_framework import routers, serializers, viewsets, status, pagination, generics, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 from django.db.models import Q
 from pricing.models import OfficeBooking, WorkplaceBooking, MeetingRoomsBooking
+from django_filters.rest_framework import DjangoFilterBackend
+
+
 
 
 
@@ -34,15 +37,18 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return email
 
 
+
+
 class BookingsSerializer(serializers.HyperlinkedModelSerializer):
+    place = serializers.CharField()
     class Meta:
         model = OfficeBooking
-        fields = ['date', 'paid']
+        fields = ['date', 'paid', 'place']
 
 
 class EmailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User;
+        model = User
         fields = ['email']
 
     def validate_email(self, email):
@@ -55,6 +61,10 @@ class UserBookingsList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return OfficeBooking.objects.filter(user = user)
+
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['user', 'email']
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -100,6 +110,11 @@ class UserViewSet(viewsets.ModelViewSet):
         if hasattr(self, 'action_serializers'):
             return self.action_serializers.get(self.action, self.serializer_class)
         return super(MyModelViewSet, self).get_serializer_class()
+
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username', 'email']
+
+
 
 
 router = routers.DefaultRouter()
