@@ -37,13 +37,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return email
 
 
-
-
 class BookingsSerializer(serializers.HyperlinkedModelSerializer):
-    place = serializers.CharField()
+    place_name = serializers.CharField(source='place.name')
     class Meta:
         model = OfficeBooking
-        fields = ['date', 'paid', 'place']
+        fields = ['date', 'paid', 'place_name']
+
 
 
 class EmailSerializer(serializers.HyperlinkedModelSerializer):
@@ -63,8 +62,7 @@ class UserBookingsList(generics.ListAPIView):
         return OfficeBooking.objects.filter(user = user)
 
     filter_backends = [filters.SearchFilter]
-    search_fields = ['user', 'email']
-
+    search_fields = ['user__username']
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -113,7 +111,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'email']
-
 
 
 
