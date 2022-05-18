@@ -29,6 +29,7 @@ def meetingrooms(request):
 
 
 def bookworkplace(request, pk):
+    current_user = request.user
     workplace = Workplace.objects.all().get(id=pk)
     error = ''
 
@@ -37,6 +38,7 @@ def bookworkplace(request, pk):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.place_id = pk
+            instance.user_id = current_user.id
             instance.paid = True
             workplace.free = False
             workplace.save()
@@ -56,6 +58,7 @@ def bookworkplace(request, pk):
     return render(request, 'pricing/bookworkplace.html', data)
 
 def bookoffice(request, pk):
+    current_user = request.user
     office = Offices.objects.all().get(id=pk)
     error = ''
     if request.method == 'POST':
@@ -63,6 +66,7 @@ def bookoffice(request, pk):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.place_id = pk
+            instance.user_id = current_user.id
             instance.paid = True
             office.free = False
             office.save()
@@ -81,6 +85,7 @@ def bookoffice(request, pk):
     return render(request, 'pricing/bookoffice.html', data)
 
 def bookmeetingroom(request, pk):
+    current_user = request.user
     meetingroom = MeetingRooms.objects.all().get(id=pk)
     error = ''
     if request.method == 'POST':
@@ -88,6 +93,7 @@ def bookmeetingroom(request, pk):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.place_id = pk
+            instance.user_id = current_user.id
             instance.paid = True
             meetingroom.free = False
             meetingroom.save()
