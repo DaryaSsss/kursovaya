@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 from django.db.models import Q
-from pricing.models import OfficeBooking, WorkplaceBooking, MeetingRoomsBooking
+from pricing.models import OfficeBooking, WorkplaceBooking, MeetingRoomsBooking, Places
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -29,12 +29,24 @@ def trigger_error(request):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+        fields = ['url', 'id', 'username', 'email', 'password' , 'is_staff']
+        write_only_fields = ('password',)
 
     def validate_email(self, email):
         if not '@' in email:
             raise ValidationError('@ is not included')
         return email
+
+
+class PlacesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Places
+        fields = ['url', 'id', 'name', 'place_type', 'desc', 'free']
+
+class PlaceViewSet(viewsets.ModelViewSet):
+    queryset = Places.objects.all()
+    serializer_class = PlacesSerializer
+    pagination_class = None
 
 
 class BookingsSerializer(serializers.HyperlinkedModelSerializer):
@@ -65,6 +77,7 @@ class UserBookingsList(generics.ListAPIView):
     search_fields = ['place__name']
 
 
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -83,6 +96,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(recent_users, many=True)
         return Response(serializer.data)
+
 
     @action(methods=['DELETE'], detail=False)
     def delete_olegs(self, request, **kwargs):
@@ -116,6 +130,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 router = routers.DefaultRouter()
 router.register(r'api/users', UserViewSet)
+router.register(r'api/places', PlaceViewSet)
 
 urlpatterns = [
     path('sentry-debug/', trigger_error),
@@ -126,5 +141,5 @@ urlpatterns = [
     path('pricing/', include('pricing.urls')),
     re_path(r'^', include(router.urls)),
     re_path(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path(r'^api/bookings', UserBookingsList.as_view())
+    re_path(r'^api/bookings', UserBookingsList.as_view()),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
