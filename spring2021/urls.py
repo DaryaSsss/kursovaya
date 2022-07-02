@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 from django.db.models import Q
-from pricing.models import OfficeBooking, WorkplaceBooking, MeetingRoomsBooking, Places
+from pricing.models import OfficeBooking, WorkplaceBooking, MeetingRoomsBooking, Places, Comments
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -38,14 +38,45 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return email
 
 
-class PlacesSerializer(serializers.HyperlinkedModelSerializer):
+class PlacesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Places
         fields = ['url', 'id', 'name', 'place_type', 'desc', 'free']
 
+class CommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ['place', 'user_id', 'text', 'date']
+
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Places.objects.all()
     serializer_class = PlacesSerializer
+    pagination_class = None
+    authentication_classes = []
+    permission_classes = ()
+
+    @action(methods=['GET'], detail=True)
+    def comments(self, request, **kwargs):
+      place = self.get_object()
+      comments = Comments.objects.filter(place=place).values()
+      return Response(comments)
+
+    @action(detail=True, methods=['POST'])
+    def create_comment(self, request, pk=None):
+      serializer = CommentsSerializer(data=request.data)
+      if (serializer.is_valid()):
+        serializer.save()
+        place = self.get_object()
+        comments = Comments.objects.filter(place=place).values()
+        return Response(comments)
+      else:
+        return Response(serializer.errors,
+          status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comments.objects.all()
+    serializer_class = CommentsSerializer
     pagination_class = None
 
 
@@ -54,6 +85,7 @@ class BookingsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OfficeBooking
         fields = ['date', 'paid', 'place_name']
+
 
 
 
@@ -131,6 +163,8 @@ class UserViewSet(viewsets.ModelViewSet):
 router = routers.DefaultRouter()
 router.register(r'api/users', UserViewSet)
 router.register(r'api/places', PlaceViewSet)
+router.register(r'api/comments', CommentViewSet)
+
 
 urlpatterns = [
     path('sentry-debug/', trigger_error),

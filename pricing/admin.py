@@ -6,7 +6,7 @@ from .models import WorkplaceBooking
 from .models import OfficeBooking
 from .models import MeetingRoomsBooking
 from .models import Places
-from .models import PlaceBooking
+from .models import PlaceBooking, Comments
 from simple_history.admin import SimpleHistoryAdmin
 from import_export.admin import ExportActionMixin
 
@@ -25,3 +25,4 @@ admin.site.register(OfficeBooking, HistoryExportAdmin)
 admin.site.register(MeetingRoomsBooking, HistoryExportAdmin)
 admin.site.register(Places)
 admin.site.register(PlaceBooking)
+admin.site.register(Comments)

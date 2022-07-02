@@ -105,7 +105,7 @@ class Places(models.Model):
         return self.name
 
 class PlaceBooking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField('Username', max_length=100)
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
     email = models.EmailField('Email', max_length=254, default='')
     date = models.DateField()
@@ -117,3 +117,18 @@ class PlaceBooking(models.Model):
 
     def __str__(self):
         return self.place.name
+
+class Comments(models.Model):
+    place = models.ForeignKey(Places, on_delete=models.CASCADE)
+    username = models.CharField('Username', max_length=50, default="Guest")
+    user_id = models.CharField('User_id', max_length=50, default="Guest")
+    text = models.TextField('Text', max_length=250)
+    date = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords()
+
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+    def __str__(self):
+        return self.username
