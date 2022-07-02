@@ -48,6 +48,8 @@ class CommentsSerializer(serializers.ModelSerializer):
         model = Comments
         fields = ['place', 'user_id', 'text', 'date']
 
+      
+
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Places.objects.all()
     serializer_class = PlacesSerializer
@@ -74,10 +76,30 @@ class PlaceViewSet(viewsets.ModelViewSet):
           status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
     pagination_class = None
+    authentication_classes = []
+    permission_classes = ()
+
+    def delete(self, request, pk, format=None):
+      comment = self.get_object(pk)
+      return Response(1)
+    
+    def update(self, request, *args, **kwargs):
+      instance = self.get_object()
+      instance.text = request.data.get("text")
+      instance.save()
+
+      place = request.data.get("place")
+
+      serializer = CommentsSerializer(instance, data=request.data)
+      serializer.is_valid(raise_exception=True)
+      self.perform_update(serializer)
+      comments = Comments.objects.filter(place=place).values()
+      return Response(comments)
 
 
 class BookingsSerializer(serializers.HyperlinkedModelSerializer):
