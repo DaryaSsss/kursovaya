@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, UpdateView, DeleteView
-from .models import Workplace, Offices, MeetingRooms
-from .forms import WorkplaceForm, OfficeForm, MeetingRoomForm
+from .models import Workplace, Offices, MeetingRooms, Places
+from .forms import WorkplaceForm, OfficeForm, MeetingRoomForm, PlaceForm
 from django.core.paginator import Paginator
 
 
@@ -110,3 +110,30 @@ def bookmeetingroom(request, pk):
         'meetingroom': meetingroom
     }
     return render(request, 'pricing/bookmeetingroom.html', data)
+
+def bookplace(request, pk):
+    current_user = request.user
+    place = Places.objects.all().get(id=pk)
+    error = ''
+    if request.method == 'POST':
+        form = PlaceForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.place_id = pk
+            instance.user_id = current_user.id
+            instance.paid = True
+            place.free = False
+            place.save()
+            instance.save()
+            return redirect('home')
+        else:
+            error = 'Incorrect form'
+
+    form = PlaceFrom()
+
+    data = {
+        'form': form,
+        'error': error,
+        'place': place
+    }
+    return render(request, 'pricing/bookplace.html', data)
