@@ -50,7 +50,7 @@ class MeetingRoomForm(ModelForm):
 class PlaceForm(ModelForm):
     class Meta:
         model = PlaceBooking
-        fields = ['date', 'email']
+        fields = ['email']
         widgets ={
             "email": EmailInput(attrs={
                 'class': 'form-control',

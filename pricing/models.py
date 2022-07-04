@@ -1,6 +1,8 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 
 class Workplace(models.Model):
@@ -105,12 +107,17 @@ class Places(models.Model):
         return self.name
 
 class PlaceBooking(models.Model):
-    user = models.CharField('Username', max_length=100)
+    username = models.CharField('Username', max_length=100)
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
     email = models.EmailField('Email', max_length=254, default='')
-    date = models.DateField()
     paid = models.BooleanField('Paid')
     history = HistoricalRecords()
+    out = models.CharField('Start', default='01/01/2022', max_length=50, help_text="When the booking starts.")
+    _in = models.CharField('End',  default='01/01/2022', max_length=50, help_text="When the booking ends.")
+
+
+    def duration(self):
+        return self.out - self._in
 
     def get_absolute_url(self):
         return f'/pricing/bookplace/{self.id}'
